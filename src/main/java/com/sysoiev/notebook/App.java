@@ -4,10 +4,15 @@ package com.sysoiev.notebook;
 import com.sysoiev.notebook.dao.ContactDao;
 import com.sysoiev.notebook.dao.impl.H2ContactDaoImpl;
 import com.sysoiev.notebook.dao.impl.PostgresContactDaoImpl;
+import com.sysoiev.notebook.dao.impl.SpringJdbcConfig;
+import com.sysoiev.notebook.model.Contact;
 import com.sysoiev.notebook.services.ContactService;
 import com.sysoiev.notebook.services.impl.FSContactServiceImpl;
 import com.sysoiev.notebook.view.CmdLineService;
 import com.sysoiev.notebook.view.impl.CmdLineServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 
@@ -18,7 +23,7 @@ public class App {
      */
     public static void main(String[] args) throws IOException {
 
-        //Создание самого нижнего слоя сервисов  - слой dao который работает со средствами долгосрочноого хранения информации.
+        /*//Создание самого нижнего слоя сервисов  - слой dao который работает со средствами долгосрочноого хранения информации.
         ContactDao contactDao = new PostgresContactDaoImpl();
 
         //Создание слоя севисов, которые хранят бизнесс логику. Логику управления моделями и т.д.
@@ -30,6 +35,12 @@ public class App {
         CmdLineService cmd = new CmdLineServiceImpl(contactService);
 
         //Непосредственный запуск графического интерфейса и программы
-        cmd.runMenu();
+        cmd.runMenu();*/
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        Contact contact = (Contact) context.getBean("splitter");
+        /*StudentJDBCTemplate studentJDBCTemplate =
+                (StudentJDBCTemplate)context.getBean("studentJDBCTemplate");*/
+
     }
 }
